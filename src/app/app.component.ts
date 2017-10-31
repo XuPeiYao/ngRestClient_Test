@@ -1,4 +1,6 @@
+import { FakeAPI } from './app-fake-api';
 import { Component } from '@angular/core';
+import { RestClientBuilder } from 'ng-restclient';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  client: FakeAPI;
+  constructor(_builder: RestClientBuilder) {
+    this.client = _builder.build(FakeAPI);
+    console.log(this.client);
+
+    this.client.getPost(1, 1234).subscribe(console.log);
+  }
 }
